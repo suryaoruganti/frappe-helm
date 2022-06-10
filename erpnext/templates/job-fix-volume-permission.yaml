@@ -23,8 +23,12 @@ spec:
         command: ['sh', '-c']
         args:
           - >
+            {{- if (eq .Values.persistence.storageType "aws-efs") }}
+            chmod -R 777 \
+            {{- else }}
             chown -R \
               "{{ default 1000 .Values.securityContext.runAsUser }}:{{ default 1000 .Values.securityContext.runAsUser }}" \
+            {{- end }}
               /home/frappe/frappe-bench
         resources:
           {{- toYaml .Values.jobs.volumePermissions.resources | nindent 10 }}

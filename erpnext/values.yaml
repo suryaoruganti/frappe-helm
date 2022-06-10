@@ -217,6 +217,7 @@ socketio:
   sidecars: []
 
 persistence:
+  # storageType: "aws-efs"
   worker:
     enabled: true
     # existingClaim: ""
